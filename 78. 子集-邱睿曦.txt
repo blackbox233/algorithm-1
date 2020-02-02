@@ -1,0 +1,70 @@
+#include<bits/stdc++.h>
+using namespace std;
+int n,x,y=1;
+int main()
+{	
+	cin>>n;
+	int nums[n],cun[n+1]={0};
+	for(int i=0;i<n;i++)
+	cin>>nums[i];
+	sort(nums,nums+n);
+	for(int i=0;i<=n;i++)
+	{
+		if(i==0)
+		{
+			cout<<"["<<"]"<<endl;
+			x++;
+			continue;
+		}int t=1;
+		if(x>1)
+		{	
+			while(t<x)
+			{
+				while(y<x)
+				{
+					cout<<"[";
+					for(int j=1;j<=t;j++)
+					{
+					if(cun[y+1]==0&&j<t)
+							y-=(t-1);
+						cout<<cun[y];
+							cout<<",";
+							y++;
+					//		break;
+					}
+					cout<<nums[i-1]<<"]"<<endl;
+				}
+//				if(t<x)
+				t++;y=1;
+			}		
+			t=0;
+		}
+		if(cun[i]==0)
+		{
+			cun[i]=nums[i-1];
+			cout<<"["<<nums[i-1]<<"]"<<endl;		
+			
+		}	x++;
+	}
+    return 0;
+}
+
+
+
+
+
+class Solution {
+public:
+    vector<vector<int> > subsets(vector<int> &S) {
+        vector<vector<int> > res(1);
+        sort(S.begin(), S.end());
+        for (int i = 0; i < S.size(); ++i) {
+            int size = res.size();
+            for (int j = 0; j < size; ++j) {
+                res.push_back(res[j]);
+                res.back().push_back(S[i]);
+            }
+        }
+        return res;
+    }
+};

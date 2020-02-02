@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+using namespace std;
+void dfs(int a[]);
+int n,b[10],cun[10],x=0,y=1;
+int main()
+{
+	scanf("%d",&n);
+	int a[n];
+	for(int i=1;i<=n;i++)
+	cin>>a[i];
+	dfs(a);
+	return 0;
+}
+
+void dfs(int a[])
+{
+	if(x==n)
+	{
+		for(int i=1;i<y;i++)
+		{
+			printf("%5d",b[i]);
+		}
+		printf("\n");
+		return ;
+	}
+	for(int i=1;i<=n;i++)
+	{
+		if(cun[i]==0){
+		b[y]=a[i];
+		x++;
+		y++;
+		cun[i]=1;
+		dfs(a);
+		cun[i]=0;
+		x--;
+		y--;
+		}	
+	}
+}//这个交力扣编译过不了，自己编译没问题

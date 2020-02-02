@@ -1,0 +1,74 @@
+#include<bits/stdc++.h>
+using namespace std;
+void dfs (char n[5],int cun,string sum);
+char a[8][5]={"abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+			  //2	  3		4	  5		6	  7		 8		9
+			  //0	  1		2	  3	    4	  5		 6		7
+char ans[10]; 
+int cun2[5]={0},shu=0,cun,x=0,y=0;
+int main()
+{
+	string sum;
+	cin>>sum;
+	int z=sum.length();
+	cun=z;
+	dfs(a[sum[x]-50],z,sum);
+    return 0;
+}
+
+void dfs (char n[5],int cun,string sum)
+{
+	if(shu==cun)
+	{
+		for(int i=0;i<shu;i++)
+		cout<<ans[i];
+		cout<<' ';
+		return ;
+	}
+	for(int i=0;i<strlen(n);i++) 
+	{
+			ans[y]=n[i];//将这位存入 
+			cun2[i]=1;
+			shu++;
+			y++;
+			dfs(a[sum[++x]-50],cun,sum);
+			--x;
+			--y;
+			--shu;
+			cun2[i]=0;
+	}
+}
+
+
+
+
+class Solution {
+public:
+    string state;
+    vector<string> ans;
+    
+    string mp[8] = {"abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+    
+    void dfs(int pos, const string& digits) {
+        if (pos == state.size()) {
+            ans.push_back(state);
+            return;
+        }
+        
+        int idx = digits[pos] - '2';
+        for (auto c : mp[idx]) {
+            state[pos] = c;
+            dfs(pos + 1, digits);
+            // state[pos] = ' ';  // 回溯
+        }
+    }
+    
+    vector<string> letterCombinations(string digits) {
+        if (digits.empty()) return {};
+        
+        state.resize(digits.size());
+        dfs(0, digits);
+        
+        return ans;
+    }
+}
