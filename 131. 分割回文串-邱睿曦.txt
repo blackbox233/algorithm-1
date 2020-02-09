@@ -1,0 +1,35 @@
+class Solution {
+public:
+    vector<vector<string>> partition(string s) {
+        vector<vector<string>> ret;
+        if(s.empty())
+            return ret;
+        vector<string> path;    // 当前回文串组合
+        int begin = 0;
+        int end = s.size() ;
+        recursion(s,path, begin,end,ret);
+        return ret;
+    }
+    void recursion(string s, vector<string> &path, int begin, int end, vector<vector<string>> &ret){//递归
+        if(begin >= s.size()){
+            ret.push_back(path);//存到ret中
+            return;
+        }
+        for (int i = begin; i < end; ++i) {
+            if(isPalindrome(s,begin,i)){//判断到是回文数才进入
+                path.push_back(s.substr(begin, i-begin +1));//存入path
+                recursion(s, path, i+1, end, ret);
+                path.pop_back();//回溯
+            }
+        }
+    }
+
+    bool isPalindrome(string s, int begin, int end){//判断回文
+        while(begin < end){
+            if(s[begin] != s[end])
+                return false;
+            ++begin, --end;
+        }
+        return true;
+    }
+};
