@@ -16,7 +16,7 @@ public:
             return;
         }
         for (int i = begin; i < end; ++i) {
-            if(isPalindrome(s,begin,i)){//判断到是回文数才进入
+            if(isPalindrome(s,begin,i)){//判断到有回文数才进入
                 path.push_back(s.substr(begin, i-begin +1));//存入path
                 recursion(s, path, i+1, end, ret);
                 path.pop_back();//回溯
