@@ -1,0 +1,46 @@
+#include<bits/stdc++.h>
+using namespace std;
+priority_queue<int, vector<int>, greater<int> >q;
+int cun[31000]={1},l=4,j=1,flag,flag1=0;
+char c[10000],cun2;
+string s;
+int main()
+{
+	int k,m,a=1;
+	cin>>k>>m;	
+	q.push(1);
+	for(int i=1;i<=k;i++){
+		q.push(a*2+1);j++;
+		q.push(a*4+5);j++;
+		cout<<q.top();
+		q.pop();
+		cun[i]=q.top();
+		a=q.top();
+	}
+	for(int i = 0; i < k; i++){
+        memset(c, 0, sizeof(c));
+       sprintf(c, "%d", cun[i]);
+        s += c;
+   }	
+	cout<<endl;flag=s.length()-m;
+	cout<<9;flag--;
+	while(flag--)
+	{
+		for(int i=l;i<s.length()-flag;i++)
+		{
+			if(flag1==0)
+			{
+				cun2=s[i];
+				flag1=1;
+			}				
+			if(cun2-'0'<s[i]-'0')
+			{
+				cun2=s[i];
+				l=i+1;	
+			}
+		}
+		cout<<cun2;
+		cun2=0;
+	}
+	return 0;	
+} 	
